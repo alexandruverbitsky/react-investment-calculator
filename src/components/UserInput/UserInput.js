@@ -8,29 +8,27 @@ const defaultUserInput = {
 };
 
 const UserInput = (props) => {
-
-    const [userInput, setUserInput] = useState(defaultUserInput);
+  const [userInput, setUserInput] = useState(defaultUserInput);
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-
-    //...
     console.log("Submit");
-    
+
+    props.onCalculate(userInput);
   };
 
   const onResetHandler = () => {
-      console.log("Reset");
-      setUserInput(defaultUserInput);
+    console.log("Reset");
+    setUserInput(defaultUserInput);
   };
 
   const inputChangeHandler = (input, value) => {
     console.log(input, value);
     setUserInput((prev) => {
-        return {
-            ...prev,
-            [input]: value
-        };
+      return {
+        ...prev,
+        [input]: value,
+      };
     });
   };
 
