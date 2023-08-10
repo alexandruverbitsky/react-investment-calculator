@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-class ResultTable extends Component {
-  render() {
+const ResultTable = props => {
+
     return (
       <table className="result">
         <thead>
@@ -14,17 +14,22 @@ class ResultTable extends Component {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>YEAR NUMBER</td>
-            <td>TOTAL SAVINGS END OF YEAR</td>
-            <td>INTEREST GAINED IN YEAR</td>
-            <td>TOTAL INTEREST GAINED</td>
-            <td>TOTAL INVESTED CAPITAL</td>
-          </tr>
+          {props.data.map((d) => (
+            <tr key={d.year}>
+              <td>{d.year}</td>
+              <td>{d.savingsEndOfYear}</td>
+              <td>{d.yearlyInterest}</td>
+              <td>
+                {d.savingsEndOfYear -
+                  props.initialInvestment -
+                  d.yearlyContribution * d.year}
+              </td>
+              <td>{props.initialInvestment + d.yearlyContribution * d.year}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     );
-  }
 }
 
 export default ResultTable;

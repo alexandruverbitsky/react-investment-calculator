@@ -17,8 +17,9 @@ function App() {
 
   console.log(userInput);
 
+  const yearlyData = []; // per-year results
+
   if (userInput) {
-    const yearlyData = []; // per-year results
 
     let currentSavings = +userInput["currentSavings"]; // feel free to change the shape of this input object!
     const yearlyContribution = +userInput["yearlyContribution"]; // as mentioned: feel free to change the shape...
@@ -47,7 +48,7 @@ function App() {
       <Header />
       <UserInput onCalculate={calculateHandler} />
       {!userInput && <p>No investment calculated yet!</p>}
-      {userInput && <ResultTable />}
+      {userInput && <ResultTable data={yearlyData} initialInvestment={ userInput.currentSavings} />}
     </div>
   );
 }
