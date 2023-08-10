@@ -1,5 +1,12 @@
 import React, { Component } from "react";
 
+const formmater = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+});
+
 const ResultTable = props => {
 
     return (
@@ -17,14 +24,20 @@ const ResultTable = props => {
           {props.data.map((d) => (
             <tr key={d.year}>
               <td>{d.year}</td>
-              <td>{d.savingsEndOfYear}</td>
-              <td>{d.yearlyInterest}</td>
+              <td>{formmater.format(d.savingsEndOfYear)}</td>
+              <td>{formmater.format(d.yearlyInterest)}</td>
               <td>
-                {d.savingsEndOfYear -
-                  props.initialInvestment -
-                  d.yearlyContribution * d.year}
+                {formmater.format(
+                  d.savingsEndOfYear -
+                    props.initialInvestment -
+                    d.yearlyContribution * d.year
+                )}
               </td>
-              <td>{props.initialInvestment + d.yearlyContribution * d.year}</td>
+              <td>
+                {formmater.format(
+                  props.initialInvestment + d.yearlyContribution * d.year
+                )}
+              </td>
             </tr>
           ))}
         </tbody>
